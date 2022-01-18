@@ -42,7 +42,4 @@ def test():
     print(res)
 
 test()
-#
-# img=Image.open("7.png")
-# img.show()  # 使用电脑的默认软件打开图片矩阵
-# plt.imshow()
+

@@ -1,3 +1,14 @@
+
+# compress/decompress images in folder (in progressing)
+
+models/tfci.py
+models/diy_tfci.py
+models/image_process.py
+
+
+
+
+
 # TensorFlow Compression
 
 TensorFlow Compression (TFC) contains data compression tools for TensorFlow.
