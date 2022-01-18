@@ -458,6 +458,9 @@ def get_custom_dataset(split, args):
   """Creates input data pipeline from custom PNG images."""
   with tf.device("/cpu:0"):
     files = glob.glob(args.train_glob)
+    files = glob.glob(args.train_glob + r"/*.png") # 加上r让字符串不转义
+
+    # print('\n\n\n\n\n\n\n\n\n\n', files)
     if not files:
       raise RuntimeError(f"No training images found with glob "
                          f"'{args.train_glob}'.")
@@ -571,10 +574,10 @@ def parse_args(argv):
 
   # High-level options.
   parser.add_argument(
-      "--verbose", "-V", action="store_true",
+      "--verbose", "-V",  default = True,  # action="store_true"
       help="Report progress and metrics when training or compressing.")
   parser.add_argument(
-      "--model_path", default="ms2020",
+      "--model_path", default="cc_cpk",
       help="Path where to save/load the trained model.")
   subparsers = parser.add_subparsers(
       title="commands", dest="command",
@@ -638,18 +641,18 @@ def parse_args(argv):
       help="Path where to log training metrics for TensorBoard and back up "
            "intermediate model checkpoints.")
   train_cmd.add_argument(
-      "--batchsize", type=int, default=8,
+      "--batchsize", type=int, default=4,
       help="Batch size for training and validation.")
   train_cmd.add_argument(
       "--patchsize", type=int, default=256,
       help="Size of image patches for training and validation.")
   train_cmd.add_argument(
-      "--epochs", type=int, default=1000,
+      "--epochs", type=int, default=10,
       help="Train up to this number of epochs. (One epoch is here defined as "
            "the number of steps given by --steps_per_epoch, not iterations "
            "over the full training dataset.)")
   train_cmd.add_argument(
-      "--steps_per_epoch", type=int, default=1000,
+      "--steps_per_epoch", type=int, default=175,
       help="Perform validation and produce logs after this many batches.")
   train_cmd.add_argument(
       "--max_validation_steps", type=int, default=16,
@@ -710,3 +713,9 @@ def main(args):
 
 if __name__ == "__main__":
   app.run(main, flags_parser=parse_args)
+
+  # python ms2020.py train --train_glob /home/dingchaofan/data/cc_compression/source/ --lambda 0.1
+  # Assets written to: bls2017/assets
+
+  # python ms2020.py --model_path cc_cpk compress ../dataset/Clipboard\ -\ 2021-05-21\ 21.38.34.png johnson22.tfci
+  # python ms2020.py --model_path cc_cpk decompress johnson22.tfci reconstruction2.png

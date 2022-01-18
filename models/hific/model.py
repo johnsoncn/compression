@@ -251,7 +251,7 @@ class HiFiC(object):
   def build_input(self,
                   batch_size,
                   crop_size,
-                  images_glob=None,
+                  images_glob = None,
                   tfds_arguments: TFDSArguments = None):
     """Build input dataset."""
     if not (images_glob or tfds_arguments):

@@ -16,7 +16,7 @@
 
 import argparse
 import sys
-
+sys.path.append('../')
 import tensorflow.compat.v1 as tf
 
 from hific import configs
@@ -135,3 +135,7 @@ def main(args):
 
 if __name__ == '__main__':
   main(parse_args(sys.argv))
+
+  # python train.py
+
+  # python -m hific.train --config mselpips --ckpt_dir ckpts/mse_lpips

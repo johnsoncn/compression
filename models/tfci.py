@@ -157,7 +157,7 @@ def compress(model, input_file, output_file, target_bpp=None, bpp_strict=False):
 def decompress(input_file, output_file):
   """Decompresses a TFCI file and writes a PNG file."""
   if not output_file:
-    output_file = input_file + ".png"
+    output_file = input_file + "11.png"
   with tf.io.gfile.GFile(input_file, "rb") as f:
     packed = tfc.PackedTensors(f.read())
   receiver = instantiate_model_signature(packed.model, "receiver")
@@ -338,3 +338,8 @@ def main(args):
 
 if __name__ == "__main__":
   app.run(main, flags_parser=parse_args)
+
+  # loss: 30.0567 - bpp: 1.5262 - mse: 285.3055 - val_loss: 53.5887 - val_bpp: 1.3841 - val_mse: 522.0461
+
+  # python tfci.py compress hific-lo ../dataset/action_030_bk2.png
+  # python tfci.py decompress ../dataset/action_030_bk2.png.tfci

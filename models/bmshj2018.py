@@ -527,3 +527,6 @@ def main(args):
 
 if __name__ == "__main__":
   app.run(main, flags_parser=parse_args)
+
+  # python bmshj2018.py compress ../dataset/Clipboard\ -\ 2021-05-21\ 21.38.34.png johnson22.tfci
+  # python bmshj2018.py decompress johnson22.tfci reconstruction2.png
